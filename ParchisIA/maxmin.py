@@ -41,13 +41,45 @@ H1=np.array([P1,P2,P3,P4])
 def lanzar():
     return random.randint(1,6)
 
-print(lanzar())
 
 ganador=False
+turno=1
+contador=0
+
 
 while(not ganador):
-    print('playing...')
+    if(turno==1):
+        print('Juega Player')
+        turno=0
+        contador=contador+1
+        print(contador)
 
+        
+
+
+
+
+        dado=lanzar()
+        if(dado==5):
+            print('Un 5 ')
+        elif(dado==6):
+            print('Un 6')
+
+    else:
+        print('Juega A.I.')
+        turno=1
+        contador=contador+1
+        print(contador)
+        dado=lanzar()
+        if(dado==5):
+            print('Un 5')
+        elif(dado==6):
+            print('Un 6')
+
+
+
+    if(contador==20):
+        ganador=True
 
 
 
