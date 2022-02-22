@@ -1,26 +1,8 @@
 import numpy as np
 import random
 
-print('Inicializar fichas JUgador')
-P1=np.array([-1,0])
-P2=P1
-P3=P1
-P4=P1
 
-print('DONE')
-
-
-print('Inicializar Fichas I.A')
-F1=P1
-F2=F1
-F3=F1
-F4=F1
-
-print('DONE')
-
-print('Inicializar tablero')
 tablero= np.zeros([68,3])
-
 tablero[4][2]=1
 tablero[11][2]=1
 tablero[16][2]=1
@@ -34,51 +16,64 @@ tablero[55][2]=1
 tablero[62][2]=1
 tablero[67][2]=1
 
-print('DONE')
 
-H1=np.array([P1,P2,P3,P4])
+H1=np.array([(-1,0,0),(-1,0,1),(-1,0,2),(-1,0,3)]) ##FICHAS PLAYER
+
+
 
 def lanzar():
     return random.randint(1,6)
+
+print(H1)
+def heuristicaPlayer():
+	contador=0
+	for x in H1:
+		fin=68
+		inicio=H1[contador][0]
+		distancia= fin-inicio
+		H1[contador][1]=distancia
+		contador+=1
+	h= H1[H1[:,1].argsort()]
+	return h;
+
+
+
+
+
 
 
 ganador=False
 turno=1
 contador=0
-
-
 while(not ganador):
     if(turno==1):
         print('Juega Player')
         turno=0
         contador=contador+1
-        print(contador)
-
-        
-
-
-
-
         dado=lanzar()
+
         if(dado==5):
-            print('Un 5 ')
-        elif(dado==6):
-            print('Un 6')
+        	salen=2
+        	c=0
+        	for x in H1:
+        		if(H1[c][0]==-1 and tablero[4][2] != 2 and salen !=0):
+        			print(H1[c][2])
+        			salen =salen-1
+        		c=c+1
+        	if (salen==2):
+        		print('No salen fichas')
+        		
+
+
+
+
 
     else:
         print('Juega A.I.')
         turno=1
         contador=contador+1
-        print(contador)
-        dado=lanzar()
-        if(dado==5):
-            print('Un 5')
-        elif(dado==6):
-            print('Un 6')
 
-
-
-    if(contador==20):
+    if(contador==3):
         ganador=True
 
 
