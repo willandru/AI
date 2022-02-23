@@ -45,8 +45,11 @@ def buscarEnemy(N):
 		if(fichas_posicion_IA[i]==N):
 			return i
 
-def prepararCaminoP1(N):
+def prepararCaminoP1(N,j):
 	barrera=False
+	posicion_inicial=j
+	print(N)
+	print(j)
 	for i in range(1,1+N):
 		if( tablero_fichas[posicion_inicial+i]==1 and tablero_tipo[posicion_inicial+i]==2 and tablero_seguros[posicion_inicial+i]!=1):
 			enemy_posicion=posicion_inicial+i
@@ -64,9 +67,11 @@ def moverP1(N):
 	z=h[0] #ID
 	w=h[1]
 	
-	posicion_inicial=fichas_posicion_P1[z]
+	posicion_id=fichas_posicion_P1[z]
+	
 
-	barrera=prepararCaminoP1(N) #Se mandan a la carcel y se buscan barreras
+
+	barrera=prepararCaminoP1(N,posicion_inicial) #Se mandan a la carcel y se buscan barreras
 	if barrera:
 		moverA= torres - posicion_inicial
 		moverB= (posicion_inicial+N)- torres
@@ -83,6 +88,8 @@ def moverP1(N):
 		tablero_tipo[fichas_posicion_P1[z]]=1
 		tablero_tipo[fichas_posicion_P1[w]]=1
 	else:
+		print('Moviendo:')
+		print(N)
 		tablero_fichas[fichas_posicion_P1[z]]-=1
 		tablero_tipo[fichas_posicion_P1[z]]=0
 		fichas_posicion_P1[z]+=N
@@ -90,6 +97,46 @@ def moverP1(N):
 
 	
 
+def noHayFichasAfuera():
+	todosEnCasa=False
+	for x in fichas_posicion_P1:
+		if(fichas_posicion_P1.sum()==-4)
+			todosEnCasa=True
+	return todosEnCasa
+
+
+ganador=False
+turno=1
+contador=0
+while(not ganador):
+    if(turno==1):
+    	enCarcel=noHayFichasAfuera()
+        print('Juega Player')
+        turno=0
+        contador=contador+1
+        dado=lanzar()
+
+
+        if(dado==5):
+        	if enCarcel:
+        		
+        	print('SALE UN CINCO*****')
+        elif dado==6:
+        	print('Sale un SEIS******')
+
+        else:
+        	moverP1(dado)
+        	
+        		#print(H1)
+    else:
+        print('Juega A.I.')
+        turno=1
+        contador=contador+1
+
+    if(contador==5):
+        ganador=True
+
+print(tablero_fichas)
 	
 			
 		
