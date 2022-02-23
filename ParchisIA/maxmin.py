@@ -73,11 +73,6 @@ while(not ganador):
         		print('No salen fichas')
         		mover(5)
         		#print(H1)
-
-
-
-
-
     else:
         print('Juega A.I.')
         turno=1
