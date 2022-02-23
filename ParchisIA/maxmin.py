@@ -16,10 +16,8 @@ tablero[55][2]=1
 tablero[62][2]=1
 tablero[67][2]=1
 
-
-H1=np.array([(-1,0,0),(-1,0,1),(-1,0,2),(-1,0,3)]) ##FICHAS PLAYER
-
-
+ ##FICHAS PLAYER
+H1=np.array([(-1,0,0),(-1,0,1),(-1,0,2),(-1,0,3)])#[posicion,bloueada,ID]
 
 def lanzar():
     return random.randint(1,6)
@@ -34,12 +32,20 @@ def heuristicaPlayer():
 		H1[contador][1]=distancia
 		contador+=1
 	h= H1[H1[:,1].argsort()]
+	print(h)
 	return h;
 
+def mover(N):
+	h=heuristicaPlayer()
+	ficha=h[0][2]
+	pi=H1[ficha][0] #pi=poscion inicial 
+	for i in range(0,N):
+		tablero[pi]=i
+		print(H1)
 
-
-
-
+	
+	
+	#print(H1)
 
 
 ganador=False
@@ -53,16 +59,20 @@ while(not ganador):
         dado=lanzar()
 
         if(dado==5):
+        	print('SALE UN CINCO')
         	salen=2
         	c=0
         	for x in H1:
-        		if(H1[c][0]==-1 and tablero[4][2] != 2 and salen !=0):
+        		if(H1[c][0]==-1 and (tablero[4][0]!=2 or tablero[4][1]!=2) and (tablero[4][0]!=1 and tablero[4][1]!=1) and salen !=0):
         			print(H1[c][2])
         			salen =salen-1
+        			H1[c][0]=4
+        			tablero[4][0]+=1
         		c=c+1
         	if (salen==2):
         		print('No salen fichas')
-        		
+        		mover(5)
+        		#print(H1)
 
 
 
@@ -73,8 +83,10 @@ while(not ganador):
         turno=1
         contador=contador+1
 
-    if(contador==3):
+    if(contador==50):
         ganador=True
+
+print(tablero)
 
 
 
