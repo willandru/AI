@@ -83,6 +83,8 @@ def moverP1(N):
 	barrera=False
 
 	if (posicion_inicial+N)> 67:
+		
+
 		fichas_coronadas_P1[z]+=1
 		fichas_posicion_P1[z]=-999
 		tablero_fichas[posicion_inicial]-=1
@@ -134,8 +136,19 @@ ganador=False
 turno=1
 contador=0
 while(not ganador):
+		
+
     if(turno==1):
+
+			
+
         print(tablero_fichas)
+        print()
+        print(int(np.sum(fichas_coronadas_P1)))
+        if(int(np.sum(fichas_coronadas_P1))==4):
+        	print('NOt ganador')
+        	ganador=True
+        	break
         print('Juega Player')
         turno=0
         contador=contador+1
