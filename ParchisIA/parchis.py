@@ -23,6 +23,7 @@ fichas_a_mover_P1= np.array([(0,0),(1,0),(2,0),(3,0)])
 fichas_a_mover_IA= np.array([(0,0),(1,0),(2,0),(3,0)])
 
 torres=0
+veces=20
 #fichas_posicion_P1[2]=5
 
 def lanzar():
@@ -132,6 +133,13 @@ def noHayFichasAfuera():
 	return todosEnCasa
 
 
+def noHayFichasAI():
+	todosEnCasa=False
+	for x in fichas_posicion_IA:
+		if(fichas_posicion_IA.sum()==-4):
+			todosEnCasa=True
+	return todosEnCasa
+
 ganador=False
 turno=1
 contador=0
@@ -143,7 +151,7 @@ while(not ganador):
 			
 
         print(tablero_fichas)
-        print()
+        print(fichas_posicion_P1)
         print(int(np.sum(fichas_coronadas_P1)))
         if(int(np.sum(fichas_coronadas_P1))==4):
         	print('NOt ganador')
@@ -170,7 +178,7 @@ while(not ganador):
         		c=c+1
         	if (salen==2):
         		print('No salen fichas')
-        		if(contador==200):
+        		if(contador==veces):
         			ganador=True
         		moverP1(5)
 
@@ -193,8 +201,46 @@ while(not ganador):
         print('Juega A.I.')
         turno=1
         contador=contador+1
+        dado=lanzar()
+        print(dado)
+        todosEnCasa=noHayFichasAI()
+        print(todosEnCasa)
+        
+        if(dado==5):
+        	print('SALE UN CINCO*****')
+        	salen=2
+        	c=0
+        	for x in fichas_posicion_IA:
+        		if(fichas_posicion_IA[c]==-1 and (tablero_fichas[25]!=2) and salen !=0):
+        			print(fichas_posicion_IA[c])
+        			salen =salen-1
+        			fichas_posicion_IA[c]=25
+        			tablero_fichas[25]+=1
+        		c=c+1
+        	if (salen==2):
+        		print('No salen fichas')
+        		if(contador==veces):
+        			ganador=True
+        		#moverP1(5)
 
-    if(contador==200):
+        	
+        elif dado==6 and not todosEnCasa:
+        	print('Sale un SEIS******')
+        	if not todosEnCasa:
+        		print('HOLA 6')
+        		#moverP1(dado)
+
+
+        else:
+        	if not todosEnCasa:
+        		print('HOLA MUNDO')
+        		#moverP1(dado)
+        	
+        		#print(H1)
+        print(fichas_posicion_IA)
+        print(tablero_fichas)
+
+    if(contador==veces):
         ganador=True
 
 print(tablero_fichas)
