@@ -16,6 +16,9 @@ llenarSegurosEnTablero()
 fichas_posicion_P1= np.ones(4)*-1
 fichas_posicion_IA= np.ones(4)*-1
 
+fichas_coronadas_P1= np.zeros(4)
+fichas_coronadas_IA= np.zeros(4)
+
 fichas_a_mover_P1= np.array([(0,0),(1,0),(2,0),(3,0)])
 fichas_a_mover_IA= np.array([(0,0),(1,0),(2,0),(3,0)])
 
@@ -55,8 +58,10 @@ def prepararCaminoP1(N,j):
 		print(posicion_inicial	)
 		print(i)
 		print(posicion_inicial+i)
-		print(tablero_fichas[int(posicion_inicial+i)])
-		if( tablero_fichas[int(posicion_inicial+i)]==1 and tablero_tipo[int(posicion_inicial+i)]==2 and tablero_seguros[int(posicion_inicial+i)]!=1):
+		#print(tablero_fichas[int(posicion_inicial+i)])
+		if(int(posicion_inicial+i)>67):
+			break
+		elif( tablero_fichas[int(posicion_inicial+i)]==1 and tablero_tipo[int(posicion_inicial+i)]==2 and tablero_seguros[int(posicion_inicial+i)]!=1):
 			enemy_posicion=int(posicion_inicial+i)
 			uid=buscarEnemy(enemy_posicion) #ID de la ficha del enemigo
 			fichas_posicion_IA[uid]= -1
@@ -76,7 +81,14 @@ def moverP1(N):
 	
 	posicion_inicial=int(fichas_posicion_P1[z])
 	barrera=False
-	if posicion_inicial !=-1:
+
+	if (posicion_inicial+N)> 67:
+		fichas_coronadas_P1[z]+=1
+		fichas_posicion_P1[z]=-999
+		tablero_fichas[posicion_inicial]-=1
+		tablero_tipo[posicion_inicial]=0
+
+	if posicion_inicial!=-1 :
 		barrera=prepararCaminoP1(N,posicion_inicial) #Se mandan a la carcel y se buscan barreras
 
 	if barrera:
@@ -97,11 +109,16 @@ def moverP1(N):
 	else:
 		print('Moviendo:')
 		print(N)
-		tablero_fichas[int(fichas_posicion_P1[z])]-=1
-		tablero_fichas[int(fichas_posicion_P1[z])+N]+=1
-		tablero_tipo[int(fichas_posicion_P1[z])]=0
-		fichas_posicion_P1[z]+=N
-		tablero_tipo[int(fichas_posicion_P1[z])]=1
+		h=heuristicaP1()
+		z=h[0]
+		if int(fichas_posicion_P1[z]) < -20:
+			pass
+		else:
+			tablero_fichas[int(fichas_posicion_P1[z])]-=1
+			tablero_fichas[int(fichas_posicion_P1[z])+N]+=1
+			tablero_tipo[int(fichas_posicion_P1[z])]=0
+			fichas_posicion_P1[z]+=N
+			tablero_tipo[int(fichas_posicion_P1[z])]=1
 
 	
 
@@ -140,11 +157,17 @@ while(not ganador):
         		c=c+1
         	if (salen==2):
         		print('No salen fichas')
+        		if(contador==200):
+        			ganador=True
         		moverP1(5)
 
         	
         elif dado==6 and not todosEnCasa:
         	print('Sale un SEIS******')
+        	if not todosEnCasa:
+        		print('HOLA 6')
+        		moverP1(dado)
+
 
         else:
         	if not todosEnCasa:
@@ -158,11 +181,11 @@ while(not ganador):
         turno=1
         contador=contador+1
 
-    if(contador==55):
+    if(contador==200):
         ganador=True
 
 print(tablero_fichas)
-	
+print(fichas_coronadas_P1)
 			
 		
 
