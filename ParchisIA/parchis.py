@@ -23,7 +23,7 @@ fichas_a_mover_P1= np.array([(0,0),(1,0),(2,0),(3,0)])
 fichas_a_mover_IA= np.array([(0,0),(1,0),(2,0),(3,0)])
 
 torres=0
-veces=20
+veces=30
 #fichas_posicion_P1[2]=5
 
 def lanzar():
@@ -59,13 +59,8 @@ def buscarEnemyAI(N):
 def prepararCaminoP1(N,j):
 	barrera=False
 	posicion_inicial=j
-	print(N)
-	print(j)
 	print('PRAPARANDO EL CAMINO...******')		
 	for i in range(1,1+N):
-		print(posicion_inicial	)
-		print(i)
-		print(posicion_inicial+i)
 		#print(tablero_fichas[int(posicion_inicial+i)])
 		if(int(posicion_inicial+i)>67):
 			break
@@ -86,7 +81,8 @@ def moverP1(N):
 	h=heuristicaP1()
 	z=h[0] #ID
 	w=h[1]
-	
+	print('heuristica P1:')
+	print(h)
 	posicion_inicial=int(fichas_posicion_P1[z])
 	barrera=False
 
@@ -134,14 +130,22 @@ def moverP1(N):
 
 def heuristicaAI():
 	contador=0
+	h=  heuristicaP1() ##LA HEURISTICA DE P1
+	z=h[0] # La ficha que P1 va a mover en la siguiente jugada
+	fin= fichas_posicion_P1[z]# La ficha que P1 va a mover en la siguiente jugada
 	for x in range(0,4):
-		fin=  heuristicaP1() ##LA FICHA P1
-		inicio=fichas_posicion_IA[x]   
+		inicio=fichas_posicion_IA[x]
 		distancia= fin-inicio ## PUEDEN SALIR NUMEROS NEGATIVOS, pues ya esta adelante de la ficha¡
 		fichas_a_mover_IA[contador][1]=distancia
 		contador+=1
 	#print(fichas_a_mover_P1)
+	print('Vector Heuristic')
+	print(fichas_a_mover_IA)
 	h= fichas_a_mover_IA[:,1].argsort()
+	print('DISTANCIA FINAL:')
+	print(fichas_a_mover_IA[:,1].argsort())
+	print(distancia)
+
 	#print(h)
 	return h
 	
@@ -149,13 +153,8 @@ def heuristicaAI():
 def prepararCaminoAI(N,j):
 	barrera=False
 	posicion_inicial=j
-	print(N)
-	print(j)
 	print('PRAPARANDO EL CAMINO. en  AIIIII**')		
 	for i in range(1,1+N):
-		print(posicion_inicial)
-		print(i)
-		print(posicion_inicial+i)
 		#print(tablero_fichas[int(posicion_inicial+i)])
 		if(int(posicion_inicial+i)>67):
 			break
@@ -260,30 +259,34 @@ def noHayFichasAI():
 ganador=False
 turno=1
 contador=0
+
+
+
+print('******************************************')
+print('SIMULACION DE PARCHIS : P1 vs IA , CON 4 FICHAS')
+
+
 while(not ganador):
-
-		
-
-    if(turno==1):
-
-			
-        print(tablero_fichas)
+    if(turno==1):			
+        print('JUEGA PLAYER')
+        print('+++++++++++++++++++++++++++++++++++++++')
+        print('Vctor Posicion FIchas P1:')
         print(fichas_posicion_P1)
+        print('Fichas Coronadas:')
         print(int(np.sum(fichas_coronadas_P1)))
         if(int(np.sum(fichas_coronadas_P1) or np.sum(fichas_coronadas_IA))==4):
         	print('Not ganador')
         	ganador=True
         	break
-        print('Juega Player')
         turno=0
         contador=contador+1
         dado=lanzar()
+        print('DADO PLAYER: ')
         print(dado)
         todosEnCasa=noHayFichasAfuera()
-
-
         if(dado==5):
-        	print('SALE UN CINCO*****')
+        	print('SALE UN CINCO**P1***')
+        	print('Se sacan 2 fichas')
         	salen=2
         	c=0
         	for x in fichas_posicion_P1:
@@ -297,76 +300,71 @@ while(not ganador):
         		print('No salen fichas')
         		if(contador==veces):
         			ganador=True
-        		moverP1(5)
-
-        	
+        		moverP1(5)        	
         elif dado==6 and not todosEnCasa:
         	print('Sale un SEIS******')
         	if not todosEnCasa:
         		print('HOLA 6')
         		moverP1(dado)
-
-
         else:
         	if not todosEnCasa:
         		print('HOLA MUNDO')
-        		moverP1(dado)
-        	
+        		moverP1(dado)       	
         		#print(H1)
         print(tablero_fichas)
+
     else:
+
         print('Juega A.I.')
+        print('----------------------')
         turno=1
         contador=contador+1
+        print('Dado IA: ')
         dado=lanzar()
         print(dado)
         todosEnCasa=noHayFichasAI()
         print(todosEnCasa)
-        
+        print('Fichas Posicicion IA:')
+        print(fichas_posicion_IA)  
         if(dado==5):
-        	print('SALE UN CINCO*****')
+        	print('SALE UN CINCO***IA**')
         	salen=2
         	c=0
         	for x in fichas_posicion_IA:
         		if(fichas_posicion_IA[c]==-1 and (tablero_fichas[25]!=2) and salen !=0):
-        			print(fichas_posicion_IA[c])
         			salen =salen-1
         			fichas_posicion_IA[c]=25
         			tablero_fichas[25]+=1
         		c=c+1
         	if (salen==2):
-        		print('No salen fichas')
+        		print('No salen fichas IA')
         		if(contador==veces):
         			ganador=True
-        		#moverP1(5)
-
-        	
+        		moverAI(dado)       	
         elif dado==6 and not todosEnCasa:
         	print('Sale un SEIS******')
         	if not todosEnCasa:
         		print('HOLA 6')
-        		#moverP1(dado)
-
-
+        		moverAI(dado)
         else:
         	if not todosEnCasa:
         		print('HOLA MUNDO')
-        		#moverP1(dado)
-        	
+        		moverAI(dado)
         		#print(H1)
         print(fichas_posicion_IA)
         print(tablero_fichas)
-
     if(contador==veces):
         ganador=True
+
+
 
 print(tablero_fichas)
 print(fichas_coronadas_P1)
 			
 		
+print('FIN DE LA SIMULACION')
 
-
-
+print('El vector mostrado represneta las 68 casillas del tablero parchis')
 
 
 
