@@ -23,7 +23,7 @@ fichas_a_mover_P1= np.array([(0,0),(1,0),(2,0),(3,0)])
 fichas_a_mover_IA= np.array([(0,0),(1,0),(2,0),(3,0)])
 
 torres=0
-veces=20
+veces=40
 #fichas_posicion_P1[2]=5
 
 def lanzar():
@@ -123,6 +123,12 @@ def moverP1(N):
 			fichas_posicion_P1[z]+=N
 			tablero_tipo[int(fichas_posicion_P1[z])]=1
 
+
+
+
+
+
+
 	
 
 def noHayFichasAfuera():
@@ -144,12 +150,12 @@ ganador=False
 turno=1
 contador=0
 while(not ganador):
+
 		
 
     if(turno==1):
 
 			
-
         print(tablero_fichas)
         print(fichas_posicion_P1)
         print(int(np.sum(fichas_coronadas_P1)))
