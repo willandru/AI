@@ -1,7 +1,7 @@
 ########################################################################################################################
 #Definición de reglas y hechos iniciales.
-reglas = [['Z', '&', 'L', 'S'], ['A', '&', 'N', 'E'], ['B', '|', 'M', 'Z'], ['A', 'M'],
-          ['Q', '&', '-W', '&', '-Z', 'N'], ['L', '&', 'M', 'E'], ['B', '&', 'C', 'Q']]
+reglas = [['¬P','|','Q','S'], ['P', '|', 'S', '|', '¬L', 'M'], ['M', '|', 'Q', '¬W'], ['¬P', '|', 'R', 'Q'],
+          ['Z', '|', '¬W', ]]
 hechos = ['A', 'L']
 cumplidas = []
 # reglas representa las reglas del sistema, hechos representa la base de hechos inicial.
@@ -48,6 +48,7 @@ while cambio:
         
         if cont not in cumplidas: 
             if buscar():  
+                print('REGLA EVALUADA: ', regla)
                 print("Regla N°",cont,":", regla)  
                 contchar = 0  
                 rule=[]

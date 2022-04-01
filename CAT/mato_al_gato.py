@@ -1,0 +1,3 @@
+primera= 
+
+[[ox , oy], []]
