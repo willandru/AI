@@ -1,0 +1,15 @@
+	Taller - Lógica Difusa
+	
+   Construir un FIS
+   como el ejemplo de la caldera
+   escoger solo 2 variables de entrada
+   cada variable debe tener al menos 5 conjuntos difusos
+   (PPT): describir cada variable, incluyendo la de salida, y la matriz de reglas.
+   Programa en python que permita ceser la inferencia difusa, con resultado, el valor de propina. las entradas deben ser crisp.
+   
+PROBLEMA: Calcular un porcentaje de propina al comer en un restaurante.
+VARIABLES: 
+¿Cuáles son las variables de entrada?
+¿Qué factores permiten valorar la experiencia con la comida?
+Escoger sólo dos que sean las más relevantes.
+¿Cuáles son las variables de salida?, ¿Cómo expresar el resultado?
