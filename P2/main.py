@@ -26,10 +26,18 @@ def leer_archivo():
         listaPreguntas.append(lineas[i].strip())
     numero_sentencias = int(lineas[numPreguntas + 1])
     # Obtener las sentencias
+    print('####LISTA DE PREGUNTAS#######')
+    for i in listaPreguntas:
+        print(i)
+    print('##################')    
     # Lee el archivo y guarda todas las sentencias en la lista
     for i in range(numPreguntas + 2, numPreguntas + numero_sentencias + 2):
         KB.append(lineas[i].strip())
     archivo_de_entrada.close()
+    print('####BASE DEL CONOCIMIENTO#######')
+    for i in KB:
+        print(i)
+    print('##################')    
     # Devolver las preguntas y la base de conocimientos que se obtiene  del archivo de entrada
     return listaPreguntas, KB
 
@@ -68,12 +76,21 @@ def parseKB(base_conocimiento):
                     sentencias_positivas[i].append(item)
                 except KeyError:
                     sentencias_positivas[i] = [item]
+    print('Sentencias Negativas: ')
+    for i in sentencias_negativas:
+        print(i)
+    print('Sentencias Postivas: ')
+    for i in sentencias_positivas:
+        print(i)
+    
     return sentencias_negativas, sentencias_positivas
 
 
 #  las constantes de la lista de preguntas
 def constantes(pregunta):
     variable = re.search('\((.*?)\)', pregunta).group(1)
+
+    print('VARIABLE: ', variable)
     return variable
 
 
@@ -96,7 +113,12 @@ def comprobarMayus(KB):
 
 def unificacion(preguntaNegacion, copia_pregunta, sentencias_positivas,
                 sentencias_negativas, sentenciasVariables):
-      
+    print('UNIFICACION : ')
+    print('Pregunta Negacion: ', preguntaNegacion)
+    print('Copia Pregunta: ',copia_pregunta) 
+    print('Sentencias Positivas: ',sentencias_positivas) 
+    print('Sentencias Negativas: ',sentencias_negativas)
+    print('Sentencias Variables: ',sentenciasVariables)
     if preguntaNegacion[0] != '~': # si no encuentra '~' significa que la pregunta es negativa
         para_emparejar = preguntaNegacion.split("(")[0]
         #Se utiliza el try para agregrar lo que se encuentra dentro de la variable para_emparejar que se encuentran en las sentencias_negativas, y eso guardarlo en value, si en un diccionario no existe dicho valor se actualiza el diccioanrio en este caso de sentencias_negativas y se agrega el valor 
@@ -227,6 +249,10 @@ def unificacion(preguntaNegacion, copia_pregunta, sentencias_positivas,
                 if re.args[0] == 'maximum recursion depth exceeded':
                     return False
         return False
+
+
+
+
 
 # k = caracter o string 
 # remueve una pregunta o axioma de una gran pregunta compuesta o un arreglo de preguntas individuales

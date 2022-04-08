@@ -1,0 +1,12 @@
+3
+L(Marco, Cesar)
+R(Marco)
+O(Marco, Cesar)
+7
+H(Marco)
+P(Marco)
+G(Cesar)
+A(Marco,Cesar)
+~P(x) | R(x)
+~R(x) | L(x,Cesar) | O(x,Cesar)
+~H(x) | ~G(y) | ~A(x,y) | ~L(x,y)
