@@ -2,53 +2,58 @@ import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 
-#1. DECLARAMOS LAS VARIABLES
+#1.DECLARAMOS LAS VARIABLES DE ENTRADA Y SALIDA
 
-#VARIABLES DE ENTRADA Y VARIABLES DE SALIDA
-calidad_comida = ctrl.Antecedent(np.arange(0,11,1), 'calidad_comida')
-servicio = ctrl.Antecedent(np.arange(0,11,1), 'servicio')
-propina = ctrl.Consequent(np.arange(0,26,1), 'tip')
-
+#INPUTS
+calidad_comida = ctrl.Antecedent(np.arange(0,101,1), 'calidad_comida')
+servicio = ctrl.Antecedent(np.arange(0,101,1), 'servicio')
+#OUTPUT
+propina = ctrl.Consequent(np.arange(0,101,1), 'propina')
 
 #2. ASIGNAMOS MEMBRESIAS:
 
 #aUTO-MEMBERSHIP FUNCTION POPULATION
-calidad_comida.automf(5)
-servicio.automf(5)
 
-#Manually: trimf = triangular membership function
+calidad_comida['desagradable']= fuzz.trimf(calidad_comida.universe, [0,0,20])
+calidad_comida['mediocre']= fuzz.gaussmf(calidad_comida.universe,30,15)
+calidad_comida['normal']= fuzz.gaussmf(calidad_comida.universe, 50,5.0)
+calidad_comida['rica']= fuzz.trimf(calidad_comida.universe, [50,70,85])
+calidad_comida['deliciosa']= fuzz.gbellmf(calidad_comida.universe, 20,70,100)
 
-propina['low']= fuzz.trimf(propina.universe, [0,0,13])
-propina['medium']= fuzz.trimf(propina.universe, [0,13,25])
-propina['high']= fuzz.trimf(propina.universe, [13,25,25])
+servicio['nulo']= fuzz.trimf(propina.universe, [0,0,20])
+servicio['malo']= fuzz.trimf(propina.universe, [15,20,40])
+servicio['normal']= fuzz.trimf(propina.universe, [30,50,60])
+servicio['bueno']= fuzz.trimf(propina.universe, [50,70,85])
+servicio['excelente']= fuzz.trimf(propina.universe, [75,100,100])
 
-# To view the plots:
-
-#quality['average'].view() #EL conjunto "AVERAGE" se resaltará
-#service.view()
-#tip.view()
+propina['minimo']= fuzz.trimf(propina.universe, [0,0,20])
+propina['poca']= fuzz.trimf(propina.universe, [15,20,40])
+propina['media']= fuzz.trimf(propina.universe, [30,50,60])
+propina['moderada']= fuzz.trimf(propina.universe, [50,70,85])
+propina['alta']= fuzz.trimf(propina.universe, [75,100,100])
 
 #3. HACER LOS CONJUNTOS DE REGLAS (IF THEN)
 
-rule1 = ctrl.Rule(calidad_comida['poor'] | servicio['poor'], propina['low'])
-rule2=ctrl.Rule(calidad_comida['average'] ,propina['medium'])
-rule3= ctrl.Rule(calidad_comida['good'] | servicio['good'], propina['high'])
+rule1 = ctrl.Rule(calidad_comida['desagradable'] | servicio['nulo'], propina['minimo'])
+rule2=ctrl.Rule(calidad_comida['mediocre'] | servicio['malo'] ,propina['poca'])
+rule3= ctrl.Rule(calidad_comida['normal'] | servicio['normal'], propina['media'])
+rule4=ctrl.Rule(calidad_comida['rica'] | servicio['bueno'], propina['moderada'])
+rule5=ctrl.Rule(calidad_comida['deliciosa'] | servicio['excelente'], propina['alta'])
 
 #4. DEFINIR EL CONTROL DEL SISTEMA
 
-tipping_ctrl = ctrl.ControlSystem([rule1, rule2, rule3])
-
+tipping_ctrl = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
 tipping= ctrl.ControlSystemSimulation(tipping_ctrl)
 
 # 5. DEFINIR LAS ENTRADAS NUMPERICAS PARA CADA VARIABLE DE ENTRADA
-tipping.input['calidad_comida']=10
-tipping.input['servicio'] = 9.8
+input_calidad=int(input('Inserte su puntaje para "CALIDA DE COMIDA" (1-100): '))
+input_servicio=int(input('Inserte su puntaje para el "SERVICIO" (1-100): '))
+tipping.input['calidad_comida']=input_calidad
+tipping.input['servicio'] = input_servicio
 
-# HACER LA FUZZYFICACION Y DESFUZZIFICACION DEL SISTEMA
+#6. HACER LA FUZZYFICACION Y DESFUZZIFICACION DEL SISTEMA
 tipping.compute()
-# IMPRIMIR LOS RESULTADOS
 
-print(tipping.output['propina'])
-#tip.view(tipping)
-
-
+#7. IMPRIMIR LOS RESULTADOS
+output_propina= tipping.output['propina']
+print('La propina apropiada sería :',output_propina)
