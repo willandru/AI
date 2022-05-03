@@ -9,10 +9,12 @@ print('Los nodos leidos son: ', lista_nodos)
 #CAPTURAR el nombre de los nodos con dependencias(head) && capturar los valores de los nodos(tail)
 head_list = []
 tail_list=[]
+predicate=[]
 
 for line in lista_nodos:
 	yim=line
 	head=yim.split('{')
+	predicate.append(yim.split('('))
 	tail=yim.split(')')
 	head_list.append(head[0])
 	tail_list.append(tail[1])
@@ -27,33 +29,62 @@ for word in head_list:
 	dependencias.append(b[1])
 	
 
-print('HEADS: ',head_list)
-print('TAILS: ', tail_list)
-print('DEPS : ', dependencias)
+#PREPARAR LAS LISTAS
 
+tls=[]
+for j in tail_list:
+	j=j.replace('{','').replace('}','').split(',')
+	tls.append(j)
+deps=[]
+for i in dependencias:
+	deps.append(i.split(','))
+nodes=[]
+for x in predicate:
+	nodes.append(x[0])
 
-cont=0
-for nodo in head_list:
-	dep=dependencias[cont]
-	tail=tail_list[cont]
-
-	print('***PARA EL NODO: ', nodo)
-
-	depend=dep.split(',')
-	for DP in depend:
-		if not len(DP)==0:
-			DP=DP+'('
-			print('FIND: ',DP)
-			for x in head_list:
-				print(x.find(DP))
-			
-	cont+=1
-
-
+print('nodes: ', nodes)
+print('deps: ', deps)
+print('values: ', tls)
 
 
 
 #SOLICITAR LAS PROPBAILIDADES :
 
+i=0
+for tabla in nodes:
+	print('-'*90)
+	print('TABLA DE PROBABILIDAD PARA :' , tabla)
+
+	for probabilidades in tls[i]:
+		print(probabilidades)
+		txt_0=str(probabilidades)
+		txt_1=str(tabla)
+		txt_2=''
+		for D in deps[i]:
+			if D=='' and len(deps[i])== 1:
+				txt_2+=' and'+str(D)+'='
+				print('P('+txt_1+'='+txt_0+')')
+				print()
+			elif D !='' and len(deps[i])== 1:
+
+				print('Hola')
+			else:
+				print('Mundo')
+				txt_2+=' and'+str(D)+'='
+				given=txt_2[4:]
+				print('P('+txt_1+'='+txt_0+'|'+given+')')
+		
+		
+
+		#SEARCH FOR DEPENDENCIE IN NODE TO GET ITS POSITION
+
+		print()
+
+		
 
 
+			 
+
+
+
+	i+=1
