@@ -60,20 +60,32 @@ for tabla in nodes:
 		txt_0=str(probabilidades)
 		txt_1=str(tabla)
 		txt_2=''
+		j=0
+		to_find=[]
 		for D in deps[i]:
 			if D=='' and len(deps[i])== 1:
 				txt_2+=' and'+str(D)+'='
 				print('P('+txt_1+'='+txt_0+')')
-				print()
+				
 			elif D !='' and len(deps[i])== 1:
-
+				txt_2+=str(D)+'='
+				given=txt_2
+				print('P('+txt_1+'='+txt_0+'|'+given+')')
+				to_find.append(str(D))
 				print('Hola')
 			else:
 				print('Mundo')
-				txt_2+=' and'+str(D)+'='
-				given=txt_2[4:]
-				print('P('+txt_1+'='+txt_0+'|'+given+')')
-		
+				if j==0:
+					txt_2+=str(D)+'='
+					to_find.append(str(D))
+				else:
+					txt_2+=' and'+str(D)+'='
+					to_find.append(str(D))
+					given=txt_2
+					print('P('+txt_1+'='+txt_0+'|'+given+')')
+				
+			j+=1
+		print(to_find)
 		
 
 		#SEARCH FOR DEPENDENCIE IN NODE TO GET ITS POSITION
