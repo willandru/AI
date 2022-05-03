@@ -1,4 +1,5 @@
 
+
 #READ THE BAYESIAN NETWORK FROM A .txt FILE
 with open('net_Rain_train.txt','r') as nodos:
 	text=nodos.read()
@@ -88,7 +89,7 @@ for tabla in nodes:
 					txt_2+=str(D)+'='
 					to_find.append(str(D))
 				else:
-					txt_2+=' and'+str(D)+'='
+					txt_2+=' and '+str(D)+'='
 					to_find.append(str(D))
 					given=txt_2
 					
@@ -117,8 +118,27 @@ for tabla in nodes:
 		if len(deps[i])>1:
 			print(v)
 			l=len(v)
+			combine_lists=[]
 			for pos in v:
-				print(tls[pos])
+				print('ss',tls[pos])
+				combine_lists.append(tls[pos])
+			print('COmbined_list', combine_lists)
+			n=len(combine_lists)
+			print(n)
+			numero_probas=1
+			for listas in combine_lists:
+				numero_probas=numero_probas*len(listas)
+
+			print(numero_probas)
+			P=[]
+			for x in range(numero_probas):
+				print(x)
+				P.append([''])
+			print(P)
+
+
+
+
 
 		
 
