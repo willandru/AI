@@ -125,14 +125,28 @@ for tabla in nodes:
 			print('COmbined_list', combine_lists)
 			n=len(combine_lists)
 			print(n)
+
+
 			numero_probas=1
+			list_max_values=[]
 			for listas in combine_lists:
+				nn=len(listas)
+				y=[]
+				for k in range(nn):
+					y.append(k)
+				list_max_values.append(y)
 				numero_probas=numero_probas*len(listas)
 
 			print(numero_probas)
+			print(list_max_values)
+
+			for i in list_max_values:
+				print('-'*20)
+				for j in range(i):
+					print(j)
+
 			P=[]
 			for x in range(numero_probas):
-				print(x)
 				P.append([''])
 			print(P)
 
