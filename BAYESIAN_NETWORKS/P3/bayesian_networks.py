@@ -56,7 +56,7 @@ for tabla in nodes:
 	print('TABLA DE PROBABILIDAD PARA :' , tabla)
 
 	for probabilidades in tls[i]:
-		print(probabilidades)
+		#print(probabilidades)
 		txt_0=str(probabilidades)
 		txt_1=str(tabla)
 		txt_2=''
@@ -70,9 +70,18 @@ for tabla in nodes:
 			elif D !='' and len(deps[i])== 1:
 				txt_2+=str(D)+'='
 				given=txt_2
-				print('P('+txt_1+'='+txt_0+'|'+given+')')
+				
 				to_find.append(str(D))
-				print('Hola')
+
+				
+				u=0
+				for buscar in nodes:
+					if buscar==to_find[0]:
+						for F in tls[u]:
+							print('P('+txt_1+'='+txt_0+'|'+given+''+F+')')
+					u+=1
+
+
 			else:
 				print('Mundo')
 				if j==0:
@@ -82,15 +91,40 @@ for tabla in nodes:
 					txt_2+=' and'+str(D)+'='
 					to_find.append(str(D))
 					given=txt_2
-					print('P('+txt_1+'='+txt_0+'|'+given+')')
+					
 				
 			j+=1
-		print(to_find)
+		v=[]
+		if len(deps[i])>1:
+			print(to_find)
+			print('P('+txt_1+'='+txt_0+'|'+given+')')			
+			
+			for word in to_find:
+				u=0
+				for buscar in nodes:
+				
+
+					if word.replace(' ','') == buscar.replace(' ',''):
+						pos=u
+						
+						break
+
+					u+=1
+				v.append(pos)
+			
+					
+		
+		if len(deps[i])>1:
+			print(v)
+			l=len(v)
+			for pos in v:
+				print(tls[pos])
+
 		
 
 		#SEARCH FOR DEPENDENCIE IN NODE TO GET ITS POSITION
 
-		print()
+
 
 		
 
