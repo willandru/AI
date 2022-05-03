@@ -17,9 +17,6 @@ for line in lista_nodos:
 	head_list.append(head[0])
 	tail_list.append(tail[1])
 	
-
-
-
 #CREAR LISTA DE DEPENDENCIAS
 
 dependencias=[]
@@ -35,7 +32,24 @@ print('TAILS: ', tail_list)
 print('DEPS : ', dependencias)
 
 
-	
+cont=0
+for nodo in head_list:
+	dep=dependencias[cont]
+	tail=tail_list[cont]
+
+	print('***PARA EL NODO: ', nodo)
+
+	depend=dep.split(',')
+	for DP in depend:
+		if not len(DP)==0:
+			DP=DP+'('
+			print('FIND: ',DP)
+			for x in head_list:
+				print(x.find(DP))
+			
+	cont+=1
+
+
 
 
 
