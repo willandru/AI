@@ -135,7 +135,7 @@ for tabla in nodes:
 			#Make Probas:
 			probas=[]
 
-			print(size_probas)
+			print('Este? ',size_probas)
 
 			for i in beta[0]:
 				for j in beta[1]:
@@ -145,7 +145,9 @@ for tabla in nodes:
 
 			# Make the combinations from 2-n
 			P=[]
+			PP=[]
 			t=0
+			got_it=False
 			for x in range(alfa):
 				print('X IN ALFAAA... : ', x)
 				if P:
@@ -173,10 +175,18 @@ for tabla in nodes:
 							print('k:', k)
 							print(k)
 							P.append(k)
+
+
+
+
 					
 							
 							
 			print(P)
+			print('total len ', len(P))
+
+			if len(P)== size_probas:
+				x=input('SS: ')
 						
 
 
