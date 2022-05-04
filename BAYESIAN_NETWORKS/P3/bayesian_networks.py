@@ -80,6 +80,7 @@ for tabla in nodes:
 					if buscar==to_find[0]:
 						for F in tls[u]:
 							print('P('+txt_1+'='+txt_0+'|'+given+''+F+')')
+							input()
 					u+=1
 
 
@@ -97,14 +98,13 @@ for tabla in nodes:
 			j+=1
 		v=[]
 		if len(deps[i])>1:
+			print('WELCOME: ')
 			print(to_find)
 			print('P('+txt_1+'='+txt_0+'|'+given+')')			
 			
 			for word in to_find:
 				u=0
 				for buscar in nodes:
-				
-
 					if word.replace(' ','') == buscar.replace(' ',''):
 						pos=u
 						
@@ -141,18 +141,27 @@ for tabla in nodes:
 				for j in beta[1]:
 					x=[i,j]
 					probas.append(x)
-			print(probas)
+			print('*_*[**',probas)
+
+			if len(deps[i])==2:
+				input('Got u: ')
+			
 
 			# Make the combinations from 2-n
 			P=[]
-			PP=[]
 			t=0
 			got_it=False
+
+			continua=True
+
 			for x in range(alfa):
 				print('X IN ALFAAA... : ', x)
+				print('P is: ', P)
+
 				if P:
 					probas=P
 					P=[]
+				
 				if x>1:
 					print('betax ',beta[x])
 					m=len(beta[x])

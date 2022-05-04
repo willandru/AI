@@ -3,4 +3,4 @@ maintainance(rain){yes, no}
 train(rain, maintainance){on time, delayed}
 something(){a, b,c}
 else(){blu, red, yel}
-appointement(train,rain){attend, miss}
+appointement(train,rain,else){attend, miss}
