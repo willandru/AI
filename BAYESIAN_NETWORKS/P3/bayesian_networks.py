@@ -54,7 +54,9 @@ print('values: ', tls)
 i=0
 for tabla in nodes:
 	print('-'*90)
+
 	print('TABLA DE PROBABILIDAD PARA :' , tabla)
+	print('COn Dependencias: ', deps[i], i)
 
 	for probabilidades in tls[i]:
 		#print(probabilidades)
@@ -64,6 +66,7 @@ for tabla in nodes:
 		j=0
 		to_find=[]
 		for D in deps[i]:
+			print('QUE_EJESO', D)
 			if D=='' and len(deps[i])== 1:
 				txt_2+=' and'+str(D)+'='
 				print('P('+txt_1+'='+txt_0+')')
@@ -137,17 +140,17 @@ for tabla in nodes:
 
 			print('Este? ',size_probas)
 
-			for i in beta[0]:
+			for z in beta[0]:
 				for j in beta[1]:
-					x=[i,j]
+					x=[z,j]
 					probas.append(x)
 			print('*_*[**',probas)
 
-			if len(deps[i])==2:
+			if len(deps[z])==2:
 				for X in probas:
-					i=v[0]
+					z=v[0]
 					j=v[1]
-					word_1=str(tls[i][X[0]])
+					word_1=str(tls[z][X[0]])
 					word_2= str(tls[j][X[1]])
 					a=given.split(',')
 					t_1=str(a[0])
@@ -187,9 +190,9 @@ for tabla in nodes:
 							print('k:', k)
 							print('esto es pp:', pp)
 							print(pp, value)
-							for i in pp:
-								print(i)
-								k.append(i)
+							for y in pp:
+								print(y)
+								k.append(y)
 							k.append(value)
 							print('k:', k)
 							print(k)

@@ -1,6 +1,6 @@
 rain(){none, light, heavy}
 maintainance(rain){yes, no}
-train(rain, maintainance){on time, delayed}
+train(rain, maintainance){on_time, delayed}
 something(){a, b,c}
 else(){blu, red, yel}
 appointement(train,rain,else){attend, miss}
