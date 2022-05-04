@@ -90,7 +90,7 @@ for tabla in nodes:
 					txt_2+=str(D)+'='
 					to_find.append(str(D))
 				else:
-					txt_2+=' and '+str(D)+'='
+					txt_2+=' , and '+str(D)+'='
 					to_find.append(str(D))
 					given=txt_2
 					
@@ -100,7 +100,7 @@ for tabla in nodes:
 		if len(deps[i])>1:
 			print('WELCOME: ')
 			print(to_find)
-			print('P('+txt_1+'='+txt_0+'|'+given+')')			
+						
 			
 			for word in to_find:
 				u=0
@@ -144,7 +144,17 @@ for tabla in nodes:
 			print('*_*[**',probas)
 
 			if len(deps[i])==2:
-				input('Got u: ')
+				for X in probas:
+					i=v[0]
+					j=v[1]
+					word_1=str(tls[i][X[0]])
+					word_2= str(tls[j][X[1]])
+					a=given.split(',')
+					t_1=str(a[0])
+					t_2=str(a[1])
+					final_txt=t_1+word_1+t_2+word_2
+					print('P('+txt_1+'='+txt_0+'|'+final_txt+')')
+					input('Got u: ')
 			
 
 			# Make the combinations from 2-n
