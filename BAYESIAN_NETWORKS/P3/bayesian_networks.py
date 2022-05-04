@@ -112,43 +112,59 @@ for tabla in nodes:
 
 					u+=1
 				v.append(pos)
-			
-					
-		
-		if len(deps[i])>1:
-			print(v)
-			l=len(v)
+
+			print('Same: ', v)
 			combine_lists=[]
 			for pos in v:
-				print('ss',tls[pos])
 				combine_lists.append(tls[pos])
-			print('COmbined_list', combine_lists)
-			n=len(combine_lists)
-			print(n)
+			alfa=len(combine_lists)
+			print('Combined LIst: ', combine_lists)
+			print('alfa: ', alfa)
+			
+			#Make vector BETA
+			beta=[]
+			size_probas=1
+
+			for tl in combine_lists:
+				n=len(tl)
+				size_probas=size_probas*n
+				l=list(range(n))
+				beta.append(l)
+			print(beta)
+
+			#Make Probas:
+			probas=[]
+
+			print(size_probas)
+
+			for i in beta[0]:
+				for j in beta[1]:
+					x=[i,j]
+					probas.append(x)
+			print(probas)
+
+			# Make the combinations from 2-n
+			p=[]
+			for x in range(alfa):
+				if x>1:
+					print(beta[x])
+					m=len(beta[x])
+					for value in beta[x]:
+						print('que value es:', value)
+						for pp in probas:
+							print('esto es pp:', pp)
+							z=pp.append(value)
+							print('esto es pp: BEFORE', pp)
+							p.append(z)
+			print(p)
+						
 
 
-			numero_probas=1
-			list_max_values=[]
-			for listas in combine_lists:
-				nn=len(listas)
-				y=[]
-				for k in range(nn):
-					y.append(k)
-				list_max_values.append(y)
-				numero_probas=numero_probas*len(listas)
+					
+		
+		
 
-			print(numero_probas)
-			print(list_max_values)
-
-			for i in list_max_values:
-				print('-'*20)
-				for j in range(i):
-					print(j)
-
-			P=[]
-			for x in range(numero_probas):
-				P.append([''])
-			print(P)
+			
 
 
 
