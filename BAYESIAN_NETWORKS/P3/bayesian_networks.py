@@ -144,19 +144,37 @@ for tabla in nodes:
 			print(probas)
 
 			# Make the combinations from 2-n
-			p=[]
+			P=[]
+			t=0
 			for x in range(alfa):
 				if x>1:
-					print(beta[x])
+					print('betax ',beta[x])
 					m=len(beta[x])
+					print('M: ', m)
+					if P:
+						probas=P
+					print('PORBAS:', probas)
+					print('MI VECTOR: ', P)
 					for value in beta[x]:
 						print('que value es:', value)
+						
+						
 						for pp in probas:
+							k=[]
+							print('k:', k)
 							print('esto es pp:', pp)
-							z=pp.append(value)
-							print('esto es pp: BEFORE', pp)
-							p.append(z)
-			print(p)
+							print(pp, value)
+							for i in pp:
+								print(i)
+								k.append(i)
+							k.append(value)
+							print('k:', k)
+							print(k)
+							P.append(k)
+					
+							
+							
+			print(P)
 						
 
 
