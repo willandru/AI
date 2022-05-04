@@ -147,17 +147,19 @@ for tabla in nodes:
 			P=[]
 			t=0
 			for x in range(alfa):
+				print('X IN ALFAAA... : ', x)
+				if P:
+					probas=P
+					P=[]
 				if x>1:
 					print('betax ',beta[x])
 					m=len(beta[x])
 					print('M: ', m)
-					if P:
-						probas=P
+					
 					print('PORBAS:', probas)
 					print('MI VECTOR: ', P)
 					for value in beta[x]:
 						print('que value es:', value)
-						
 						
 						for pp in probas:
 							k=[]
