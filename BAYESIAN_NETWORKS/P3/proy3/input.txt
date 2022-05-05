@@ -1,0 +1,24 @@
+P(maria = + | terremoto = +, robo = -)
+P(maria = + | terremoto = -, robo = +)
+******
+robo
+0.001
+***
+terremoto
+0.002
+***
+alarma | robo terremoto 
+0.95 + + 
+0.94 + - 
+0.29 - + 
+0.001 - - 
+***
+maria | alarma 
+0.7 +
+0.01 -
+******
+juan | alarma 
+0.9 +
+0.05 -
+
+

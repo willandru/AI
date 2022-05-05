@@ -204,33 +204,10 @@ for tabla in nodes:
 					ff=fT.replace(' ','')
 					p03=input(ff+':')
 					word_dict.update({ff:p03})
-						
-
-
-					
-		
-		
-
-			
-
-
-
-
-
-		
-
-		#SEARCH FOR DEPENDENCIE IN NODE TO GET ITS POSITION
-
-
-
-		
-
-
-			 
-
-
 
 	i+=1
 
-
 print(word_dict)
+print('WELCOME BACK')
+while(True):
+	input('?- ')
