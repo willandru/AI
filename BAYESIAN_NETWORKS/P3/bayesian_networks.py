@@ -310,6 +310,8 @@ while(True):
 	l4=list(dict.fromkeys(l4))
 	print('variables ocultas: ',l4)
 
+#LA QUERY NO TIENE VARIABLES OCULTAS:
+
 	if not l4:
 		print('La Query NO tiene variables ocultas')
 	
@@ -321,8 +323,6 @@ while(True):
 				if busc==h:
 					D.append(deps[i])
 				i+=1
-		
-
 		j=0
 		for proba in A:
 			txt='P('+str(proba)+'='+B[j]
@@ -343,11 +343,6 @@ while(True):
 							ans=str(B[k])
 							txt_2+= depp+'= '+ans+' ,'
 						k+=1
-					
-
-
-					
-
 
 					#look for value of teh dependencies
 			txt_2+=')'
@@ -381,13 +376,76 @@ while(True):
 
 
 
-		
+#QUERY CON VARIABLES OCULTAS:		
 	else:
 		print('La Query TIENE VARIABLES OCULTAS: ')
 		print('variables conocidas: ',A)
+		print('Valores conocidos: ', B)
 		l3 = [x for x in C if x not in A]
 		l3=list(dict.fromkeys(l3))
 		print('variables ocultas: ',l3)
+
+		K=[] # PARA PONER LOS NODOS PADRES
+		for head in A:
+			k=0
+			for pos in nodes:
+				if head==pos:
+					K.append(deps[k])
+				k+=1
+
+		print(K)
+
+		#Make probas:
+		l=0
+		W=[]
+		for proba in A:
+			
+			txt='P('+str(proba)+'= '+str(B[l])+'|'
+			
+			li=K[l]
+			txt1=''
+
+			for word in li:
+				print('aca,',word)
+				hidden=False
+				for x in l3:
+					if x==word:
+						print(word,' es una OCULTA')
+						hidden=True
+						#FIND THE OCULT WORD VALUES
+						u=0
+						for w in nodes:
+							if w==word:
+								z_tail=tls[u]
+								
+								print('z-tail',z_tail)
+								for z in z_tail:
+									print('Z in ',z)
+									txt1=str(word)+'='+str(z)+','
+									W[l].append(txt1)
+										
+									print(txt+txt1)
+
+							u+=1
+
+				if not hidden:
+					print(word,'NO es oculta')
+					y=0
+					for ind in A:
+						if ind==word:
+							res=B[y]
+						y+=1
+					txt1+=str(word)+'='+str(res)+','
+					print('aca: ', txt+txt1)
+			
+
+
+					
+			l+=1
+			
+
+
+			
 
 		
 
