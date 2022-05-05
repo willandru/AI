@@ -69,7 +69,9 @@ for tabla in nodes:
 			print('QUE_EJESO', D)
 			if D=='' and len(deps[i])== 1:
 				txt_2+=' and'+str(D)+'='
-				print('P('+txt_1+'='+txt_0+')')
+				ult='P('+txt_1+'='+txt_0+')'
+				ult=ult.replace(' ','')
+				print(ult)
 				
 			elif D !='' and len(deps[i])== 1:
 				txt_2+=str(D)+'='
@@ -82,7 +84,9 @@ for tabla in nodes:
 				for buscar in nodes:
 					if buscar==to_find[0]:
 						for F in tls[u]:
-							print('P('+txt_1+'='+txt_0+'|'+given+''+F+')')
+							fin='P('+txt_1+'='+txt_0+'|'+given+''+F+')'
+							fin=fin.replace(' ','')
+							print(fin)
 							input()
 					u+=1
 
@@ -93,7 +97,7 @@ for tabla in nodes:
 					txt_2+=str(D)+'='
 					to_find.append(str(D))
 				else:
-					txt_2+=' , and '+str(D)+'='
+					txt_2+=','+str(D)+'='
 					to_find.append(str(D))
 					given=txt_2
 					
@@ -146,7 +150,7 @@ for tabla in nodes:
 					probas.append(x)
 			print('*_*[**',probas)
 
-			if len(deps[z])==2:
+			if len(deps[i])==2:
 				for X in probas:
 					z=v[0]
 					j=v[1]
@@ -155,8 +159,10 @@ for tabla in nodes:
 					a=given.split(',')
 					t_1=str(a[0])
 					t_2=str(a[1])
-					final_txt=t_1+word_1+t_2+word_2
-					print('P('+txt_1+'='+txt_0+'|'+final_txt+')')
+					final_txt=t_1+word_1+','+t_2+word_2
+					final='P('+txt_1+'='+txt_0+'|'+final_txt+')'
+					final=final.replace(' ','')
+					print(final)
 					input('Got u: ')
 			
 
@@ -208,7 +214,34 @@ for tabla in nodes:
 			print('total len ', len(P))
 
 			if len(P)== size_probas:
-				x=input('SS: ')
+				for p in P:
+					print(p)
+					print('PpppP: ', v, to_find)
+					traslate=[]
+					TAILS=[]
+					for h in v:
+						TAILS.append(tls[h])
+					print(TAILS)
+
+					k=[]
+					o=0
+					for pos in p:
+						k.append(TAILS[o][pos])
+						o+=1
+
+					print(k, '<------')
+
+					len_ans=len(k)
+					TXT=''
+					for w in range(len_ans):
+						TEMP=str(to_find[w])+'='+str(k[w])
+						TXT+=',' +TEMP
+						print('S,e,,,,', TXT[1:]) 
+					TXT=TXT[1:]
+
+					fT='P('+txt_1+'='+txt_0+'|'+TXT+')'
+					ff=fT.replace(' ','')
+					x=input(ff)
 						
 
 
