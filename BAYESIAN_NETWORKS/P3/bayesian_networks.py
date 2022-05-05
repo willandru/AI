@@ -224,9 +224,10 @@ else:
 	        f.write('%s:%s\n' % (key, value))
 
 
-print('Your DICTIONARY: ', word_dict)
+#print('Your DICTIONARY: ', word_dict)
 
 
+print('\n'*4)
 print('INFERENCE: ')
 while(True):
 
@@ -311,17 +312,16 @@ while(True):
 
 	if not l4:
 		print('La Query NO tiene variables ocultas')
-		print(A)
-		print(B)
-		print('Buscar dependencias: ')
+	
 		D=[]
+		H=[]
 		for busc in A:
 			i=0
 			for h in nodes:
 				if busc==h:
 					D.append(deps[i])
 				i+=1
-		print(D)
+		
 
 		j=0
 		for proba in A:
@@ -333,13 +333,13 @@ while(True):
 				if depp=='':
 					txt_2=')'
 				else:
-					print('Deeep:',depp)
+					
 					#look for value
 					k=0
 					for f in A:
-						print('F: ', f)
+						
 						if depp==f:
-							print('B : ',B[k])
+							
 							ans=str(B[k])
 							txt_2+= depp+'= '+ans+' ,'
 						k+=1
@@ -353,11 +353,27 @@ while(True):
 			txt_2+=')'
 			txt+=txt_2
 			txt=txt.replace('))',')').replace(',)',')').replace(' ', '')
-			print(txt)
+			
+			H.append(txt)
 
 
 			j+=1
-			
+
+		
+
+		#GET PROBABILITIES
+		Q=[]
+		for i in H:
+			for key, value in word_dict.items():
+				if sorted(i)==sorted(key):
+					Q.append(value)
+
+
+		resp=1
+		for i in Q:
+			resp=resp*float(i)
+
+		print('La probabilidad del evento es: ', resp)
 
 
 
