@@ -311,6 +311,43 @@ while(True):
 
 	if not l4:
 		print('La Query NO tiene variables ocultas')
+		print(A)
+		print(B)
+		print('Buscar dependencias: ')
+		D=[]
+		for busc in A:
+			i=0
+			for h in nodes:
+				if busc==h:
+					D.append(deps[i])
+				i+=1
+		print(D)
+
+		j=0
+		for proba in A:
+			txt='P('+str(proba)+'='+B[j]
+			#look for value of proba	
+			for depp in D[j]:
+				if depp=='':
+					txt_2=')'
+				else:
+					print(depp)
+					txt_2='|'+depp+'='
+
+					#look for value of teh dependencies
+			txt+=txt_2
+			print(txt)
+
+
+			j+=1
+			
+
+
+
+
+
+
+
 		
 	else:
 		print('La Query TIENE VARIABLES OCULTAS: ')
