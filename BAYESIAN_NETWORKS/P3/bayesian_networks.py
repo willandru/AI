@@ -398,51 +398,50 @@ while(True):
 		#Make probas:
 		l=0
 		W=[]
-		for proba in A:
-			
-			txt='P('+str(proba)+'= '+str(B[l])+'|'
-			
-			li=K[l]
-			txt1=''
-
-			for word in li:
-				print('aca,',word)
-				hidden=False
-				for x in l3:
-					if x==word:
-						print(word,' es una OCULTA')
-						hidden=True
-						#FIND THE OCULT WORD VALUES
-						u=0
-						for w in nodes:
-							if w==word:
-								z_tail=tls[u]
-								
-								print('z-tail',z_tail)
-								for z in z_tail:
-									print('Z in ',z)
-									txt1=str(word)+'='+str(z)+','
-									W[l].append(txt1)
-										
-									print(txt+txt1)
-
-							u+=1
-
-				if not hidden:
-					print(word,'NO es oculta')
-					y=0
-					for ind in A:
-						if ind==word:
-							res=B[y]
-						y+=1
-					txt1+=str(word)+'='+str(res)+','
-					print('aca: ', txt+txt1)
-			
+		
+		for x in K:
+			print('x:',x)
+			Q=[]
+			e=0
+			for i in x:
+				i_is_Hidden=False
+				for hh in l3:
+					if hh==i:
+						i_is_Hidden=True
+				print('i:',i)
+				print(i_is_Hidden)
 
 
-					
-			l+=1
-			
+
+				#To Find : i 
+
+				if i_is_Hidden:
+					print('hidden:', i)
+					c=0
+					for cabeza in nodes:
+						if cabeza==i:
+							print('PI:', tls[c])
+							PI=tls[c]
+							Q.append(PI)
+						c+=1
+
+				else:
+					s=0
+					for pos in A:
+						if i == pos:
+							PI=B[s]
+						s+=1
+					print('PI2', PI)
+					Q.append([PI])
+				print('QQQQ', Q)
+				
+				e+=1
+			W.append(Q)
+
+		print(W)
+
+				
+
 
 
 			
