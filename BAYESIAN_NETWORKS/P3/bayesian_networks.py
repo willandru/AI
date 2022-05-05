@@ -327,15 +327,32 @@ while(True):
 		for proba in A:
 			txt='P('+str(proba)+'='+B[j]
 			#look for value of proba	
+			txt_2='|'
 			for depp in D[j]:
+				
 				if depp=='':
 					txt_2=')'
 				else:
-					print(depp)
-					txt_2='|'+depp+'='
+					print('Deeep:',depp)
+					#look for value
+					k=0
+					for f in A:
+						print('F: ', f)
+						if depp==f:
+							print('B : ',B[k])
+							ans=str(B[k])
+							txt_2+= depp+'= '+ans+' ,'
+						k+=1
+					
+
+
+					
+
 
 					#look for value of teh dependencies
+			txt_2+=')'
 			txt+=txt_2
+			txt=txt.replace('))',')').replace(',)',')').replace(' ', '')
 			print(txt)
 
 
