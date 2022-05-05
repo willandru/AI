@@ -12,7 +12,7 @@ head_list = []
 tail_list=[]
 predicate=[]
 
-for line in lista_nodos:
+for line in lista_nodos: #lista re fea
 	yim=line
 	head=yim.split('{')
 	predicate.append(yim.split('('))
@@ -20,7 +20,7 @@ for line in lista_nodos:
 	head_list.append(head[0])
 	tail_list.append(tail[1])
 	
-print(head_list)
+print('qq', head_list)
 #CREAR LISTA DE DEPENDENCIAS
 
 dependencias=[]
@@ -49,12 +49,12 @@ print('deps: ', deps)
 print('values: ', tls)
 
 
+
 datos_cargados=False
 word_dict={}
 if datos_cargados:
 	#SOLICITAR LAS PROPBAILIDADES :
 
-	
 
 	i=0
 	for tabla in nodes:
@@ -237,7 +237,6 @@ while(True):
 	for Z in QUERY:
 		Q.append(Z.split('='))
 	
-
 	A=[]
 	B=[]
 
@@ -439,6 +438,39 @@ while(True):
 			W.append(Q)
 
 		print(W)
+
+
+		#CREATE THE TOKENS
+		c=0
+		for head in A:
+			txt='P('+str(head)+'='
+			txt1=str(B[c])
+			l=K[c]
+			
+			d=0
+			txt4=txt+txt1+'|'
+			print('txt4: ', txt4)
+			ans=W[c][d]
+			an=len(ans)
+			for u in range(an):
+				txt3=''
+
+				for j in l:
+					print('L is:',  l)
+					print('j', j)
+					txt3+=str(j)+'='+str(ans[u])
+					print('W: ', ans)
+
+					print(txt4+txt3)
+
+					
+					d+=1
+			
+
+
+
+
+			c+=1
 
 				
 
