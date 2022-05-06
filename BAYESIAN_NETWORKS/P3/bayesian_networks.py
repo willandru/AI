@@ -248,9 +248,8 @@ while(True):
 
 	#SABER SI TIENE VARIABLES OCULTAS O NO
 	Oculta=False
-	
-	C=[]
 
+	C=[]
 	for head in A:
 		No_Oculta=False
 		
@@ -392,7 +391,7 @@ while(True):
 					K.append(deps[k])
 				k+=1
 
-		print(K)
+		print('K:', K)
 
 		#Make probas:
 		l=0
@@ -437,10 +436,11 @@ while(True):
 				e+=1
 			W.append(Q)
 
-		print(W)
+		print('W:', W)
 
 
 		#CREATE THE TOKENS
+		T=[]
 		c=0
 		for head in A:
 			txt='P('+str(head)+'='
@@ -454,14 +454,29 @@ while(True):
 			an=len(ans)
 			for u in range(an):
 				txt3=''
-
+				za=0
+				zx=len(l)
 				for j in l:
 					print('L is:',  l)
 					print('j', j)
-					txt3+=str(j)+'='+str(ans[u])
-					print('W: ', ans)
+					tttx=str(ans[u])
+					if(za>=1):
+						print(W[c][za][0])
+						tttx=str(W[c][za][0])
 
-					print(txt4+txt3)
+					
+					txt3+=str(j)+'='+tttx+','
+					print('W: ', ans)
+					txt5=txt4+txt3+')'
+
+					txt5=txt5.replace(',)',')').replace(' ','')
+					za+=1	
+					if(zx==za):
+						T.append(txt5)
+
+					print('****',txt5)
+
+					
 
 					
 					d+=1
@@ -471,6 +486,56 @@ while(True):
 
 
 			c+=1
+
+		print(T)
+		ww=[]
+		for tt in W:
+			uu=[]
+			for yy in tt:
+				print(len(yy))
+				uu.append(len(yy))
+			ww.append(uu)
+		print(ww)
+
+		ll=[]
+		ii=[]
+		b=0
+		for dd in ww:
+			
+			a=1
+			for kk in dd:
+				a=a*kk
+			b+=a
+			
+			ii.append(b)
+
+		print(ii)
+		cc=0
+		p=[]
+		temp=0
+		for v in ii:
+			
+			print('v,',v)
+			print('temp, ', temp)
+			aa=list(range(temp,v))
+			print('aca', aa)
+			temp=v
+		print(p)
+
+		Z=[]
+		xo=0
+		for i in p:
+			for j in p:
+				print('i', i)
+				print('j', j)
+
+
+
+
+
+
+
+
 
 				
 
