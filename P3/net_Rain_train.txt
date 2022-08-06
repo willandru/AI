@@ -1,0 +1,4 @@
+rain(){none,light,heavy}
+maintainance(rain){yes,no}
+train(rain,maintainance){on_time,delayed}
+appointement(train){attend, miss}
